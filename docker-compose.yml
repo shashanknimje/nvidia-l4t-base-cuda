@@ -1,0 +1,17 @@
+services:
+  plex:
+    image: l4t-plex
+    container_name: plex
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    #    priviliged: true
+    network_mode: host
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /mnt/external/storage/plex-media-server/config:/config
+      - /mnt/external/storage/plex-media-server/media:/data
+      - /mnt/external/storage/plex-media-server/transcode:/transcode
+    restart: unless-stopped
