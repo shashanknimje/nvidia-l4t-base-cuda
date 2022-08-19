@@ -56,7 +56,7 @@ RUN \
 
 EXPOSE 32400/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
 
-VOLUME /config /transcode
+VOLUME /config /transcode /data
 
 CMD ["source /plex-start.sh"]
 
