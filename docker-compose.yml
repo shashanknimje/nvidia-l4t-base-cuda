@@ -11,7 +11,7 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
-      - /mnt/external/storage/plex-media-server/config:/config
-      - /mnt/external/storage/plex-media-server/media:/data
-      - /mnt/external/storage/plex-media-server/transcode:/transcode
+      - <path/to/plex/database>:/config
+      - <path/to/media>:/data
+      - <path/to/transcode/temp>:/transcode
     restart: unless-stopped
