@@ -33,3 +33,5 @@ https://github.com/plexinc/pms-docker/blob/master/Dockerfile.arm64
 
 https://github.com/plexinc/pms-docker/blob/master/docker-compose-host.yml.template
 
+https://stackoverflow.com/questions/60485743/how-to-use-docker-entrypoint-with-shell-script-file-combine-parameter
+
