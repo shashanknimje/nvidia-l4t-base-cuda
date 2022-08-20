@@ -2,19 +2,23 @@ FROM nvcr.io/nvidia/l4t-base:r32.7.1
 
 ENV TERM="xterm" LANG="C.UTF-8" LC_ALL="C.UTF-8"
 
-COPY ./plex-start.sh /plex-start.sh
+COPY ./plex-entrypoint.sh /plex-entrypoint.sh
 
 RUN \
 
+# Make the shell script executable
+    chmod +x /plex-entrypoint.sh && \
+    \
+
+
 # Update and upgrade all packages
-    apt update && \
-    apt dist-upgrade -y \
+    apt-get update && \
+    apt-get dist-upgrade -y \
     && \
     \
 
-# Update and get dependencies
-    apt update && \
-    apt install -y \
+# Get dependencies
+    apt-get install -y \
       curl \
       apt-transport-https \
       gnupg \
@@ -28,8 +32,8 @@ RUN \
     echo deb https://downloads.plex.tv/repo/deb public main | tee /etc/apt/sources.list.d/plexmediaserver.list && \
     \
 
-    apt update && \
-    apt install -y \
+    apt-get update && \
+    apt-get install -y \
       plexmediaserver \
     && \
     \
@@ -48,8 +52,8 @@ RUN \
     \
 
 # Cleanup
-    apt -y autoremove && \
-    apt -y clean && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/*
@@ -58,7 +62,9 @@ EXPOSE 32400/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414
 
 VOLUME /config /transcode /data
 
-CMD ["source /plex-start.sh"]
+ENTRYPOINT ["/plex-entrypoint.sh"]
+
+CMD ["/bin/bash"]
 
 
 
