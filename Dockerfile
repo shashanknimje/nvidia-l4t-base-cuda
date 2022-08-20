@@ -31,6 +31,7 @@ RUN apt-get update && apt-get dist-upgrade -y && \
 COPY ./jetson-ota-public.key /etc/jetson-ota-public.key
 RUN apt-key add /etc/jetson-ota-public.key && \
     echo "deb https://repo.download.nvidia.com/jetson/common $RELEASE main" >> /etc/apt/sources.list
+# The below two sources have been commented out as they were creating issues in installing ffmpeg. It seems that the above jetson/common $RELEASE main repo also has ffmpeg, which installs successfully.
 #    echo "deb https://repo.download.nvidia.com/jetson/ffmpeg main main" | tee -a /etc/apt/sources.list && \
 #    echo "deb-src https://repo.download.nvidia.com/jetson/ffmpeg main main" | tee -a /etc/apt/sources.list
 

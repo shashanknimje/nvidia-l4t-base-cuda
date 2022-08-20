@@ -14,5 +14,5 @@ export PLEX_MEDIA_SERVER_INFO_MODEL="$(uname -m)"
 export PLEX_MEDIA_SERVER_INFO_PLATFORM_VERSION="$(grep ^VERSION= /etc/os-release | awk -F= "{print \$2}" | tr -d \")"
 exec "/usr/lib/plexmediaserver/Plex Media Server"
 
-# This is to pass the execution to the CMD at the end parameter in the Dockerfile.
+# This is required in order to pass the execution to the CMD arguement at the end of the Dockerfile.
 exec "$@"
