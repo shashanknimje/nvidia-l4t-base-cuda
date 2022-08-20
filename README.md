@@ -44,3 +44,5 @@ https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3261/index.html#page/Te
 https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3261/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/accelerated_gstreamer.html#wwpID0E0R40HA
 
 https://repo.download.nvidia.com/jetson/
+
+https://gitlab.com/nvidia/container-images/l4t-base
