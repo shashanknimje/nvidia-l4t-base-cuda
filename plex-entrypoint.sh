@@ -15,4 +15,4 @@ export PLEX_MEDIA_SERVER_INFO_PLATFORM_VERSION="$(grep ^VERSION= /etc/os-release
 exec "/usr/lib/plexmediaserver/Plex Media Server"
 
 # This is to pass the execution to the CMD at the end parameter in the Dockerfile.
-#exec "$@"
+exec "$@"
