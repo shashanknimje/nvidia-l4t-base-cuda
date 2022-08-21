@@ -1,19 +1,8 @@
-# nvidia-l4t-base-plex
-Running Plex Media Server on Nvidia L4T (Linux for Tegra)  docker container.
-
+# nvidia-l4t-base-cuda
+A ready to go nvidia jetson linux for tegra cuda enabled image && container generator.
 
 # Setup
-
-After running the create-container.sh file successfully, follow the below steps.
-
-Run the plex-start.sh file located at "/" inside the docker container.
-
-To begin configuring the Plex Media Server, browse to http://localhost:32400/web/.
-
-To configure Plex Media Server remotely, you can first create an SSH tunnel (setup can only be done from localhost)
-
-$ ssh ip.address.of.server -L 8888:localhost:32400
-and then browse to http://localhost:8888/web/.
+Just run the ./create-container.sh file in order to build the docker image and the container.
 
 # References
 
@@ -28,10 +17,6 @@ https://gitlab.com/nvidia/container-images/l4t-base/-/tree/master/
 https://repo.download.nvidia.com/jetson/
 
 https://wiki.archlinux.org/title/Plex
-
-https://github.com/plexinc/pms-docker/blob/master/Dockerfile.arm64
-
-https://github.com/plexinc/pms-docker/blob/master/docker-compose-host.yml.template
 
 https://stackoverflow.com/questions/60485743/how-to-use-docker-entrypoint-with-shell-script-file-combine-parameter
 

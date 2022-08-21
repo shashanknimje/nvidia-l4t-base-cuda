@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker build -t l4t-plex ./ && \
+docker build -t l4t-base-cuda ./ && \
 docker-compose up -d

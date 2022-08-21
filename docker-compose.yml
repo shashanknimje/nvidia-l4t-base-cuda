@@ -1,7 +1,7 @@
 services:
-  plex:
-    image: l4t-plex
-    container_name: plex
+  l4t-base-cuda:
+    image: l4t-base-cuda
+    container_name: l4t
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     network_mode: host
@@ -9,8 +9,4 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all
-    volumes:
-      - /mnt/external/storage/plex-media-server/config:/config
-      - /mnt/external/storage/plex-media-server/data:/data
-      - //mnt/external/storage/plex-media-server/transcode:/transcode
     restart: unless-stopped

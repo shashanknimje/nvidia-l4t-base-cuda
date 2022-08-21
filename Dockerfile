@@ -6,14 +6,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG CUDA="10.2"
 ARG RELEASE="r32.7"
 
-# Setup directories, and copy & make shell script executable
-COPY ./plex-entrypoint.sh /
-RUN mkdir -p \
-    /config \
-    /transcode \
-    /data && \
-    chmod +x /plex-entrypoint.sh
-
 # Get apt utilities and man pages. You can comment this section out if you don't need those.
 RUN apt-get update && apt-get install -y \
     apt-utils \
@@ -57,28 +49,11 @@ RUN CUDAPKG=$(echo $CUDA | sed 's/\./-/'); \
 
 ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
-# Fetch and install plexmediaserver
-RUN curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add - && \
-    echo deb https://downloads.plex.tv/repo/deb public main | tee /etc/apt/sources.list.d/plexmediaserver.list && \
-    apt-get update && \
-    apt-get install -y \
-    plexmediaserver 
-
-# Add user
-# RUN useradd -U -d /config -s /bin/false plex && \
-# usermod -G users plex 
-
 # Cleanup
 RUN apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/*
-
-EXPOSE 32400/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
-
-VOLUME /config /transcode /data
-
-ENTRYPOINT ["/plex-entrypoint.sh"]
 
 CMD ["/bin/bash"]
