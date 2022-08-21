@@ -4,7 +4,6 @@ services:
     container_name: plex
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    #    priviliged: true
     network_mode: host
     runtime: nvidia
     environment:

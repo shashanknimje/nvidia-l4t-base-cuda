@@ -11,15 +11,17 @@ COPY ./plex-entrypoint.sh /
 RUN mkdir -p \
     /config \
     /transcode \
-    /data \
-    /usr/local/cuda && \
+    /data && \
     chmod +x /plex-entrypoint.sh
+
+# Get apt utilities and man pages. You can comment this section out if you don't need those.
+RUN apt-get update && apt-get install -y \
+    apt-utils \
+    man-db \
 
 # Update & upgrade all packages, and get dependencies
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y \
-    apt-utils \
-    man-db \
     gnupg2 \
     ca-certificates \
     curl \
@@ -36,7 +38,6 @@ RUN apt-key add /etc/jetson-ota-public.key && \
 #    echo "deb-src https://repo.download.nvidia.com/jetson/ffmpeg main main" | tee -a /etc/apt/sources.list
 
 # Install CUDA runtime libraries, ffmpeg, and Gstreamer
-COPY ./usr/local/cuda/samples /usr/local/cuda/
 RUN CUDAPKG=$(echo $CUDA | sed 's/\./-/'); \
     apt-get update && apt-get install -y \
 	cuda-libraries-$CUDAPKG \
@@ -81,18 +82,3 @@ VOLUME /config /transcode /data
 ENTRYPOINT ["/plex-entrypoint.sh"]
 
 CMD ["/bin/bash"]
-
-
-#CMD ["/bin/bash"]
-
-# When you do docker run with bash as the command, the init system (e.g. SystemD) doesn’t get started (nor does your start script, since the command you pass overrides the CMD in the Dockerfile). Try to change the command you use to /sbin/init, start the container in daemon mode with -d, and then look around in a shell using docker exec -it <container id> sh.
-
-#CMD ["/usr/sbin/init"]
-
-#COPY docker-systemctl-replacement/files/systemctl3.py /usr/bin/systemctl
-#COPY docker-systemctl-replacement/files/journalctl3.py /usr/bin/journalctl
-
-#RUN test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
-#RUN test -L /bin/journalctl || ln -sf /usr/bin/journalctl /bin/journalctl
-
-#CMD ["/usr/bin/systemctl"]
