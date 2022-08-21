@@ -17,7 +17,7 @@ RUN mkdir -p \
 # Get apt utilities and man pages. You can comment this section out if you don't need those.
 RUN apt-get update && apt-get install -y \
     apt-utils \
-    man-db \
+    man-db 
 
 # Update & upgrade all packages, and get dependencies
 RUN apt-get update && apt-get dist-upgrade -y && \
